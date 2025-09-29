@@ -3,10 +3,10 @@ import random
 from tkinter import Tk, Label, Entry, Button, Text, Scrollbar, END, N, S, E, W
 from datetime import datetime
 
-class languageQuiz:
+class japaneseQuiz:
     def __init__(self, master):
         self.master = master
-        master.title("language Quiz")
+        master.title("japanese Quiz")
         master.geometry("800x800")
         master.resizable(False, False)
 
@@ -32,7 +32,7 @@ class languageQuiz:
         self.font_size = 12
 
         # Create GUI elements
-        self.label_question = Label(master, text="What is the reading for the language word:", font=("Calibri", self.font_size))
+        self.label_question = Label(master, text="What is the reading for the japanese word:", font=("Calibri", self.font_size))
         self.entry_answer = Entry(master, font=("Calibri", self.font_size))
         self.button_submit = Button(master, text="Submit", command=self.check_answer, font=("Calibri", self.font_size))
 
@@ -66,9 +66,9 @@ class languageQuiz:
         if self.current_question < self.num_questions:
             random_item = random.choice(self.filtered_data)
             self.correct_reading = random_item[2]['reading']
-            self.language_word = random_item[0]
+            self.japanese_word = random_item[0]
 
-            self.label_question.config(text=f"What is the reading for the language word: {self.language_word}")
+            self.label_question.config(text=f"What is the reading for the japanese word: {self.japanese_word}")
             self.entry_answer.delete(0, 'end')  # Clears
         else:
             self.show_results()
@@ -77,14 +77,14 @@ class languageQuiz:
         user_input = self.entry_answer.get()
         is_correct = user_input == self.correct_reading
         result = {
-            'language_word': self.language_word,
+            'japanese_word': self.japanese_word,
             'correct_reading': self.correct_reading,
             'user_input': user_input,
             'is_correct': is_correct
         }
         self.quiz_results.append(result)
 
-        feedback = f"{len(self.quiz_results)}. {result['language_word']} - Your answer: {result['user_input']} - Correct reading: {result['correct_reading']} - {'Correct' if result['is_correct'] else 'Incorrect'}\n"
+        feedback = f"{len(self.quiz_results)}. {result['japanese_word']} - Your answer: {result['user_input']} - Correct reading: {result['correct_reading']} - {'Correct' if result['is_correct'] else 'Incorrect'}\n"
 
         # Display feedback in the Text widget
         self.text_results.config(state="normal")  # Allow modifications
@@ -99,7 +99,7 @@ class languageQuiz:
         results_text += "\nQuiz completed. Showing results:\n"
         for idx, result in enumerate(self.quiz_results, start=1):
             css_class = 'correct' if result['is_correct'] else 'incorrect'
-            results_text += f"{idx}. {result['language_word']} - Your answer: {result['user_input']} - Correct reading: {result['correct_reading']} - {'Correct' if result['is_correct'] else 'Incorrect'}\n"
+            results_text += f"{idx}. {result['japanese_word']} - Your answer: {result['user_input']} - Correct reading: {result['correct_reading']} - {'Correct' if result['is_correct'] else 'Incorrect'}\n"
 
         # Display results in the Text widget
         self.text_results.config(state="normal")  # Allow modifications
@@ -153,7 +153,7 @@ class languageQuiz:
 
             for result in self.quiz_results:
                 css_class = 'correct' if result['is_correct'] else 'incorrect'
-                html_content += f"<p class='{css_class}'>{result['language_word']} - Your answer: {result['user_input']} - Correct reading: {result['correct_reading']} - {'Correct' if result['is_correct'] else 'Incorrect'}</p>"
+                html_content += f"<p class='{css_class}'>{result['japanese_word']} - Your answer: {result['user_input']} - Correct reading: {result['correct_reading']} - {'Correct' if result['is_correct'] else 'Incorrect'}</p>"
 
             html_content += """
                 <script>
@@ -173,5 +173,5 @@ class languageQuiz:
 
 if __name__ == "__main__":
     root = Tk()
-    app = languageQuiz(root)
+    app = japaneseQuiz(root)
     root.mainloop()
